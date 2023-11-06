@@ -111,4 +111,19 @@ describe("Factory should validate inputs", () => {
       expect(e).toBeInstanceOf(ValidationError);
     }
   });
+
+  it("should throw  a validation error on empty imageUrl", () => {
+    //Given
+    const name = "cloth";
+    const imageUrl = "";
+
+    //When
+    try {
+      expect(createProductCategory(name, imageUrl)).toThrow();
+      const result = createProductCategory(name, imageUrl);
+      //Then
+    } catch (e) {
+      expect(e).toBeInstanceOf(ValidationError);
+    }
+  });
 });

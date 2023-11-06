@@ -29,16 +29,22 @@ export default function createProductCategory(
   imageUrl: string
 ): ProductCategory {
   if (name === null) {
-    throw new ValidationError("Product category name is required");
+    throw new ValidationError("Name is required");
   }
   if (typeof name !== "string") {
-    throw new ValidationError("Product category name must be of type string");
+    throw new ValidationError("Name must be of type string");
   }
   if (name === "") {
-    throw new ValidationError("Product category name cannot be blank");
+    throw new ValidationError("Name cannot be blank");
   }
-  if (imageUrl === null){
-    throw new ValidationError("ImageUrl is required")
+  if (imageUrl === null) {
+    throw new ValidationError("ImageUrl is required");
+  }
+  if (imageUrl === "") {
+    throw new ValidationError("ImageUrl cannot be blank");
+  }
+  if (typeof imageUrl !== "string") {
+    throw new ValidationError("ImageUrl must be of type string");
   }
   const newProductCategory = { name, imageUrl };
   return newProductCategory;
