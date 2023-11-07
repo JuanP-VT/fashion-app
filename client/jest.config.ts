@@ -10,6 +10,8 @@ module.exports = {
     "^.+\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/__mocks__/fileMock.js",
     // Handle module aliases
     "^@/components/(.*)$": "<rootDir>/components/$1",
+    "^@/app/utils/error/(.*)$": "<rootDir>/app/utils/error/$1",
+    "^@/app/factory/(.*)$": "<rootDir>/app/factory/$1",
   },
   transform: {
     // Use swc/jest for transforming files.
