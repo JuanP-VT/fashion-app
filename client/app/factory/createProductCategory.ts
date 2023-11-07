@@ -20,7 +20,6 @@ import ValidationError from "../utils/error/ValidationError";
  * @throws Will throw a validation error if `name` is `null`.
  * @throws Will throw a validation error if `name` is not a string.
  * @throws Will throw a validation error if `name` is an empty string.
- * @throws Will throw a validation error if  imageUrl` is null`.
  *
  * @public
  */
@@ -28,6 +27,7 @@ export default function createProductCategory(
   name: string,
   imageUrl: string
 ): ProductCategory {
+  // Name is unique and requires validation, imageUrl can be blank
   if (name === null) {
     throw new ValidationError("Name is required");
   }
@@ -37,15 +37,10 @@ export default function createProductCategory(
   if (name === "") {
     throw new ValidationError("Name cannot be blank");
   }
-  if (imageUrl === null) {
-    throw new ValidationError("ImageUrl is required");
-  }
-  if (imageUrl === "") {
-    throw new ValidationError("ImageUrl cannot be blank");
-  }
-  if (typeof imageUrl !== "string") {
-    throw new ValidationError("ImageUrl must be of type string");
-  }
-  const newProductCategory = { name, imageUrl };
+  const formatImageUrl = imageUrl ?? "";
+  const newProductCategory = {
+    name: name.toLowerCase().trim(),
+    imageUrl: formatImageUrl.toLowerCase().trim(),
+  };
   return newProductCategory;
 }

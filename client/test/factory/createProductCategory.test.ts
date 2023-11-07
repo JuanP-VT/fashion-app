@@ -16,6 +16,22 @@ describe("Creates object correctly", () => {
     expect(result.name).toBe(mockCategory.name);
     expect(result.imageUrl).toBe(mockCategory.imageUrl);
   });
+
+  it("created object imageUrl should be empty string instead of null if non is given", () => {
+    //Given
+    const name = "cloth";
+    const imageUrl: any = null;
+    const mockCategory: ProductCategory = {
+      name,
+      imageUrl,
+    };
+    //When
+    const result = createProductCategory(name, imageUrl);
+
+    //Then
+    expect(result.name).toBe(mockCategory.name);
+    expect(result.imageUrl).toBe("");
+  });
 });
 
 describe("Factory should validate inputs", () => {
@@ -88,36 +104,6 @@ describe("Factory should validate inputs", () => {
     const imageUrl = "https://e.com";
     //When
 
-    try {
-      expect(createProductCategory(name, imageUrl)).toThrow();
-      const result = createProductCategory(name, imageUrl);
-      //Then
-    } catch (e) {
-      expect(e).toBeInstanceOf(ValidationError);
-    }
-  });
-
-  it("should throw  a validation error on null imageUrl", () => {
-    //Given
-    const name = "cloth";
-    const imageUrl: any = null;
-
-    //When
-    try {
-      expect(createProductCategory(name, imageUrl)).toThrow();
-      const result = createProductCategory(name, imageUrl);
-      //Then
-    } catch (e) {
-      expect(e).toBeInstanceOf(ValidationError);
-    }
-  });
-
-  it("should throw  a validation error on empty imageUrl", () => {
-    //Given
-    const name = "cloth";
-    const imageUrl = "";
-
-    //When
     try {
       expect(createProductCategory(name, imageUrl)).toThrow();
       const result = createProductCategory(name, imageUrl);
